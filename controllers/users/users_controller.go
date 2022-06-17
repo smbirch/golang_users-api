@@ -8,6 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/smbirch/bookstore_users-api/domain/users"
+	"github.com/smbirch/bookstore_users-api/services"
 )
 
 func CreateUser(c *gin.Context) {
@@ -22,6 +23,12 @@ func CreateUser(c *gin.Context) {
 	if err := json.Unmarshal(bytes, &user); err != nil {
 		fmt.Println("err:", err.Error())
 		//todo: handle json error
+		return
+	}
+
+	result, saveErr := services.CreateUser(user)
+	if saveErr != nil {
+		//todo: handle user creation error
 		return
 	}
 

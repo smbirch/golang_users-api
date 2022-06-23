@@ -5,6 +5,7 @@ import (
 	"github.com/smbirch/bookstore_users-api/controllers/users"
 )
 
+//supported API routes
 func mapUrls() {
 	router.GET("/ping", ping.Ping)
 

@@ -7,6 +7,7 @@ var (
 )
 
 func StartApplication() {
+	//sets up api routes
 	mapUrls()
 	router.Run(":8080")
 }

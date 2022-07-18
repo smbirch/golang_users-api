@@ -1,5 +1,3 @@
-//this file is the access layer to the database
-
 package users
 
 import (

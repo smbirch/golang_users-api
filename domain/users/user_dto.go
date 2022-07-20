@@ -11,7 +11,7 @@ type User struct {
 	FirstName   string `json:"first_name"`
 	LastName    string `json:"last_name"`
 	Email       string `json:"email"`
-	DateCreated string `json:"DateCreated"`
+	DateCreated string `json:"date_created"`
 }
 
 func (user *User) Validate() *errors.RestErr {

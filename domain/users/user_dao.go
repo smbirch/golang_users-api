@@ -1,9 +1,6 @@
 package users
 
 import (
-	"fmt"
-	"strings"
-
 	"github.com/smbirch/bookstore_users-api/datasources/mysql/users_db"
 	"github.com/smbirch/bookstore_users-api/utils/date_utils"
 	"github.com/smbirch/bookstore_users-api/utils/errors"
@@ -11,7 +8,6 @@ import (
 )
 
 const (
-	errorNoRows     = "no rows in result set"
 	queryInsertUser = "INSERT INTO users(first_name, last_name, email, date_created) VALUES(?, ?, ?, ?);"
 	queryGetUser    = "SELECT id, first_name, last_name, email, date_created FROM users WHERE id=?;"
 )
@@ -26,13 +22,8 @@ func (user *User) Get() *errors.RestErr {
 	result := stmt.QueryRow(user.Id)
 
 	if getErr := result.Scan(&user.Id, &user.FirstName, &user.LastName, &user.Email, &user.DateCreated); getErr != nil {
-		if strings.Contains(getErr.Error(), errorNoRows) {
-			return errors.NewNotFoundError(fmt.Sprintf("user %d not found", user.Id))
-		}
 		return mysql_utils.ParseError(getErr)
-
 	}
-
 	return nil
 }
 

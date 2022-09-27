@@ -28,8 +28,7 @@ var (
 )
 
 func init() {
-	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s",
-		username, password, host, schema)
+	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s)/%s", username, password, host, schema)
 
 	var err error
 	Client, err = sql.Open("mysql", dataSourceName)

@@ -8,6 +8,7 @@ import (
 	"github.com/smbirch/bookstore_users-api/utils/mysql_utils"
 )
 
+// todo: put sql queries into their own .sql files and import
 const (
 	queryInsertUser       = "INSERT INTO users(first_name, last_name, email, date_created, status, password) VALUES(?, ?, ?, ?, ?, ?);"
 	queryGetUser          = "SELECT id, first_name, last_name, email, date_created, status FROM users WHERE id=?;"

@@ -5,10 +5,14 @@ import (
 	"github.com/smbirch/bookstore_users-api/controllers/users"
 )
 
-//supported API routes
+// supported API routes
 func mapUrls() {
 	router.GET("/ping", ping.Ping)
 
-	router.GET("/users/:user_id", users.GetUser)
-	router.POST("/users", users.CreateUser)
+	router.POST("/users", users.Create)
+	router.GET("/users/:user_id", users.Get)
+	router.PUT("/users/:user_id", users.Update)
+	router.PATCH("/users/:user_id", users.Update)
+	router.DELETE("/users/:user_id", users.Delete)
+	router.GET("/internal/users/search", users.Search)
 }

@@ -1,6 +1,7 @@
 package users
 
 import (
+	"net/mail"
 	"strings"
 
 	"github.com/smbirch/bookstore_users-api/utils/errors"
@@ -27,14 +28,20 @@ func (user *User) Validate() *errors.RestErr {
 	user.LastName = strings.TrimSpace(user.LastName)
 
 	user.Email = strings.TrimSpace(strings.ToLower(user.Email))
-	if user.Email == "" {
+
+	_, err := mail.ParseAddress(user.Email)
+	if err != nil {
 		return errors.NewBadRequestError("invalid email address")
 	}
 
 	user.Password = strings.TrimSpace(user.Password)
-	// todo: setup minimum PW requirements/validation
-	if user.Password == "" {
-		return errors.NewBadRequestError("invalid password")
+	if len(user.Password) < 6 {
+		return errors.NewBadRequestError("invalid password: must be 6+ characters. one must be special character")
+	}
+
+	if !strings.ContainsAny(user.Password, ",./!@#$%^&*()-_+=\\|}]{[:;") {
+		return errors.NewBadRequestError("invalid password: must be 6+ characters. one must be special character")
+
 	}
 
 	return nil
